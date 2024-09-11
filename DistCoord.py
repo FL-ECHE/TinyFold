@@ -13,14 +13,14 @@ class DistMap():
         #self.noise = noise_type
 
         self.skipid = []
-        self.coords = np.matrix([[0,0,0] for i in range(len(matrix[0]))])
+        self.coords = np.matrix([[0.,0.,0.] for i in range(len(matrix[0]))])
         self.rng = np.random.default_rng()
     
     def distance(self,a, b):
         return np.linalg.norm(a-b)
 
     def apply_t(self,a,b):
-        return a+b
+        return np.add(a,b)
 
     def generate(self):
         for i in range(self.titer):
@@ -41,6 +41,7 @@ class DistMap():
                     bestdist = dist
                     trans = pos1
             self.coords[idx1] = trans
+
             if (dist < self.dm[idx1,idx2] + self.tdist) and (dist > self.dm[idx1,idx2] - self.tdist):
                 self.skipid.append(idx1)
                 self.skipid.append(idx2)
